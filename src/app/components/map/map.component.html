@@ -1,0 +1,35 @@
+<!-- Filter Toggle Button (Icon) -->
+<button (click)="toggleFilterPanel()" class="filter-toggle">
+    &#9776;
+</button>
+
+<div class="filter-panel" [ngStyle]="showFilters?{'display':'block'}:{'display':'none'}">
+    <div class="d-flex gap-2">
+        <div>
+            <label>District:</label>
+            <select class="form-select" [(ngModel)]="selectedDistrict">
+                <option *ngFor="let district of districts" [value]="district">{{ district }}</option>
+            </select>
+        </div>
+        <div>
+            <label>Block:</label>
+            <select class="form-select" [(ngModel)]="selectedBlock">
+                <option *ngFor="let block of blocks" [value]="block">{{ block }}</option>
+            </select>
+        </div>
+        <div>
+            <label>Lessee:</label>
+            <select class="form-select" [(ngModel)]="selectedLessee">
+                <option *ngFor="let lessee of lessees" [value]="lessee">{{ lessee }}</option>
+            </select>
+        </div>
+        <!-- <div>
+            <button (click)="applyFilters()" class="btn btn-primary mt-4">Apply Filters</button>
+        </div> -->
+    </div>
+</div>
+
+<div id="map" style="height: 89vh;"></div>
+<button (click)="toggleMapType()" class="toggle-btn">
+    Switch to {{ isSatellite ? 'Default' : 'Satellite' }} Map
+</button>

@@ -1,0 +1,39 @@
+.toggle-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    font-weight: bold;
+}
+
+.filter-toggle {
+    position: absolute;
+    top: 10.6%;
+    left: 5%;
+    background: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    font-weight: bold;
+}
+
+.filter-panel {
+    position: absolute;
+    top: 10%;
+    left: 9%;
+    background: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    font-weight: bold;
+    transition: left 0.3s ease-in-out;
+}
