@@ -1,0 +1,36 @@
+.filter-toggle {
+    position: absolute;
+    top: 10%;
+    right: 3%;
+    background: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    z-index: 1000;
+    font-weight: bold;
+}
+
+
+.side-panel {
+    position: absolute;
+    top: 10%;
+    right: 9%;
+    background: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    z-index: 1000;
+    font-weight: bold;
+    transform: scale(0);
+    /* Start scaled down */
+    transform-origin: top left;
+    /* Scale from the top-left corner */
+    transition: transform 0.3s ease-in-out;
+    /* Smooth scale transition */
+}
+
+
+.filter-panel-visible {
+    transform: scale(1);
+    /* Scale up to full size */
+}

@@ -16,8 +16,8 @@ export class MapComponent {
   showFilters: boolean = false;
 
   // Dummy data for filters (replace with actual data if available)
-  districts: string[] = ['District 1', 'District 2', 'District 3'];
-  blocks: string[] = ['Block A', 'Block B', 'Block C'];
+  districts: string[] = ['Jharsugada'];
+  blocks: string[] = ['Joda'];
   lessees: string[] = ['Lessee X', 'Lessee Y', 'Lessee Z'];
 
   selectedDistrict: string = '';

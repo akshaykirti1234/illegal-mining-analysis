@@ -3,7 +3,7 @@
     &#9776;
 </button>
 
-<div class="filter-panel" [ngStyle]="showFilters?{'display':'block'}:{'display':'none'}">
+<div class="filter-panel" [ngClass]="{'filter-panel-visible': showFilters}">
     <div class="d-flex gap-2">
         <div>
             <label>District:</label>

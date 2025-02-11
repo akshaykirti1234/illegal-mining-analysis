@@ -32,8 +32,15 @@
     padding: 8px 12px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
     z-index: 1000;
     font-weight: bold;
-    transition: left 0.3s ease-in-out;
+    transform: scale(0);
+    /* Start scaled down */
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    /* Bounce effect */
+}
+
+.filter-panel-visible {
+    transform: scale(1);
+    /* Scale up with bounce */
 }

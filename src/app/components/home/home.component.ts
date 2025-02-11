@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  showSideBar: boolean = false;
+
+  toggleFilterPanel(): void {
+    this.showSideBar = !this.showSideBar;
+  }
+
 }
