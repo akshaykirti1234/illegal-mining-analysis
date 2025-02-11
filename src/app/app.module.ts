@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { MapComponent } from './components/map/map.component';
-import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -13,7 +12,6 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     HomeComponent,
     MapComponent,
-    SideBarComponent
   ],
   imports: [
     BrowserModule,

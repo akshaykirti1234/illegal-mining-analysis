@@ -35,12 +35,42 @@
     z-index: 1000;
     font-weight: bold;
     transform: scale(0);
-    /* Start scaled down */
     transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    /* Bounce effect */
 }
 
 .filter-panel-visible {
     transform: scale(1);
-    /* Scale up with bounce */
+}
+
+/* -------------------------------------------------Side Bar---------------------------------------- */
+.sidebar-toggle {
+    position: absolute;
+    top: 10.6%;
+    right: 5%;
+    background: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    font-weight: bold;
+}
+
+.side-panel {
+    position: absolute;
+    top: 10%;
+    right: 9%;
+    background: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    z-index: 1000;
+    font-weight: bold;
+    transform: scale(0);
+    transform-origin: top left;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-panel-visible {
+    transform: scale(1);
 }

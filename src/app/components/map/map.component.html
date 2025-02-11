@@ -3,6 +3,7 @@
     &#9776;
 </button>
 
+<!-- Filter Panel -->
 <div class="filter-panel" [ngClass]="{'filter-panel-visible': showFilters}">
     <div class="d-flex gap-2">
         <div>
@@ -29,7 +30,18 @@
     </div>
 </div>
 
+<!-- Map -->
 <div id="map" style="height: 89vh;"></div>
+
+<!-- Map Type Toggle Button -->
 <button (click)="toggleMapType()" class="toggle-btn">
     Switch to {{ isSatellite ? 'Default' : 'Satellite' }} Map
 </button>
+
+<!-- Side Bar -->
+<button (click)="toggleSideBar()" class="sidebar-toggle">
+    &#9776;
+</button>
+<div class="side-panel" [ngClass]="{'sidebar-panel-visible': showSideBar}">
+    Radio button for jan and dec
+</div>

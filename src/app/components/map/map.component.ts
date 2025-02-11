@@ -14,6 +14,7 @@ export class MapComponent {
   satelliteLayer!: TileLayer<XYZ>;
   isSatellite: boolean = false;
   showFilters: boolean = false;
+  showSideBar: boolean = false;
 
   // Dummy data for filters (replace with actual data if available)
   districts: string[] = ['Jharsugada'];
@@ -56,6 +57,10 @@ export class MapComponent {
 
   toggleFilterPanel(): void {
     this.showFilters = !this.showFilters;
+  }
+
+  toggleSideBar(): void {
+    this.showSideBar = !this.showSideBar;
   }
 
   applyFilters(): void {
