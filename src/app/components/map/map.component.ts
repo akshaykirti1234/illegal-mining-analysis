@@ -17,7 +17,7 @@ export class MapComponent {
   showSideBar: boolean = false;
 
   // Dummy data for filters (replace with actual data if available)
-  districts: string[] = ['Jharsugada'];
+  district = 'Keonjhar';
   blocks: string[] = ['Joda'];
   lessees: string[] = ['Lessee X', 'Lessee Y', 'Lessee Z'];
 
