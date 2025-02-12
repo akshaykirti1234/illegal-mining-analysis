@@ -1,114 +1,82 @@
-<!-- Filter Toggle Button (Icon) -->
-<button (click)="toggleFilterPanel()" class="filter-toggle">
-    &#9776;
-</button>
-
-<!-- Filter Panel -->
-<div class="filter-panel" [ngClass]="{'filter-panel-visible': showFilters}">
-    <div class="d-flex gap-2">
-        <div>
-            <label>District:</label>
-            <select class="form-select" [(ngModel)]="selectedDistrict">
-
-                <option value="" selected>{{ district }}</option>
-            </select>
-        </div>
-        <div>
-            <label>Block:</label>
-            <select class="form-select" [(ngModel)]="selectedBlock">
-                <option value="" selected>--Select--</option>
-                <option *ngFor="let block of blocks" [value]="block">{{ block }}</option>
-            </select>
-        </div>
-        <div>
-            <label>Lessee:</label>
-            <select class="form-select" [(ngModel)]="selectedLessee">
-                <option value="" selected>--Select--</option>
-                <option *ngFor="let lessee of lessees" [value]="lessee">{{ lessee }}</option>
-            </select>
-        </div>
-        <!-- <div>
-            <button (click)="applyFilters()" class="btn btn-primary mt-4">Apply Filters</button>
-        </div> -->
-    </div>
-</div>
-
-<!-- Map -->
-<div id="map" style="height: 89vh;"></div>
-
 <!-- Map Type Toggle Button -->
 <button (click)="toggleMapType()" class="toggle-btn">
     Switch to {{ isSatellite ? 'Default' : 'Satellite' }} Map
 </button>
 
-<!-- Side Bar -->
-<button (click)="toggleSideBar()" class="sidebar-toggle">
-    &#9776;
-</button>
-
-<div class="side-panel p-4 bg-white shadow-lg rounded-lg w-72" [ngClass]="{'sidebar-panel-visible': showSideBar}">
-    <h2 class="text-lg font-semibold mb-4">Filters</h2>
-    <!-- Lessee Boundary -->
-    <div class="mb-4">
-        <label class="flex items-center space-x-2">
-            <input type="checkbox" name="lesseeBoundary" class="form-checkbox text-blue-600">&nbsp;
-            <span>Lessee Boundary</span>
-        </label>
-    </div>
-    <hr>
-    <!-- Total Illegal Mining Area -->
-    <div>
-        <label class="flex items-center space-x-2">
-            <input type="checkbox" name="totalIllegalMining" class="form-checkbox text-blue-600">&nbsp;
-            <span>Total Illegal Mining Area</span>
-        </label>
-        <div class="flex space-x-4 mt-2">
-            &nbsp;&nbsp; <label class="flex items-center space-x-1">
-                <input type="radio" name="totalIllegalMiningMonth" value="jan" class="form-radio text-blue-600">
-                <span>Jan</span>
-            </label>&nbsp;
-            <label class="flex items-center space-x-1">
-                <input type="radio" name="totalIllegalMiningMonth" value="dec" class="form-radio text-blue-600">
-                <span>Dec</span>
-            </label>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10 p-0">
+            <!-- Map -->
+            <div id="map" style="height: 91vh;"></div>
+        </div>
+        <div class="col-2">
+            <div class="side-panel p-4 bg-white w-72">
+                <h2 class="text-lg font-semibold mb-4">Filters</h2>
+                <!-- Lessee Boundary -->
+                <div class="mb-4">
+                    <label class="flex items-center space-x-2">
+                        <input type="checkbox" name="lesseeBoundary" class="form-checkbox text-blue-600">&nbsp;
+                        <span>Lessee Boundary</span>
+                    </label>
+                </div>
+                <hr>
+                <!-- Total Illegal Mining Area -->
+                <div>
+                    <label class="flex items-center space-x-2">
+                        <input type="checkbox" name="totalIllegalMining" class="form-checkbox text-blue-600">&nbsp;
+                        <span>Total Illegal Mining Area</span>
+                    </label>
+                    <div class="flex space-x-4 mt-2">
+                        &nbsp;&nbsp; <label class="flex items-center space-x-1">
+                            <input type="radio" name="totalIllegalMiningMonth" value="jan"
+                                class="form-radio text-blue-600">
+                            <span>Jan</span>
+                        </label>&nbsp;
+                        <label class="flex items-center space-x-1">
+                            <input type="radio" name="totalIllegalMiningMonth" value="dec"
+                                class="form-radio text-blue-600">
+                            <span>Dec</span>
+                        </label>
+                    </div>
+                </div>
+                <hr>
+                <!-- Nearby Illegal Mining -->
+                <div class="mb-4">
+                    <label class="flex items-center space-x-2">
+                        <input type="checkbox" name="illegalMining" class="form-checkbox text-blue-600">&nbsp;
+                        <span>Near by Illegal Mining</span>
+                    </label>
+                    <div class="flex space-x-4 mt-2">
+                        &nbsp;&nbsp; <label class="flex items-center space-x-1">
+                            <input type="radio" name="illegalMiningMonth" value="jan" class="form-radio text-blue-600">
+                            <span>Jan</span>
+                        </label>&nbsp;
+                        <label class="flex items-center space-x-1">
+                            <input type="radio" name="illegalMiningMonth" value="dec" class="form-radio text-blue-600">
+                            <span>Dec</span>
+                        </label>
+                    </div>
+                </div>
+                <hr>
+                <!-- TCI -->
+                <div class="mb-4">
+                    <label class="flex items-center space-x-2">
+                        <input type="checkbox" name="TCI" class="form-checkbox text-blue-600">&nbsp;
+                        <span>TCI</span>
+                    </label>
+                    <div class="flex space-x-4 mt-2">
+                        &nbsp;&nbsp; <label class="flex items-center space-x-1">
+                            <input type="radio" name="TCIMonth" value="jan" class="form-radio text-blue-600">
+                            <span>Jan</span>
+                        </label>&nbsp;
+                        <label class="flex items-center space-x-1">
+                            <input type="radio" name="TCIMonth" value="dec" class="form-radio text-blue-600">
+                            <span>Dec</span>
+                        </label>
+                    </div>
+                </div>
+                <hr>
+            </div>
         </div>
     </div>
-    <hr>
-    <!-- Nearby Illegal Mining -->
-    <div class="mb-4">
-        <label class="flex items-center space-x-2">
-            <input type="checkbox" name="illegalMining" class="form-checkbox text-blue-600">&nbsp;
-            <span>Near by Illegal Mining</span>
-        </label>
-        <div class="flex space-x-4 mt-2">
-            &nbsp;&nbsp; <label class="flex items-center space-x-1">
-                <input type="radio" name="illegalMiningMonth" value="jan" class="form-radio text-blue-600">
-                <span>Jan</span>
-            </label>&nbsp;
-            <label class="flex items-center space-x-1">
-                <input type="radio" name="illegalMiningMonth" value="dec" class="form-radio text-blue-600">
-                <span>Dec</span>
-            </label>
-        </div>
-    </div>
-    <hr>
-    <!-- TCI -->
-    <div class="mb-4">
-        <label class="flex items-center space-x-2">
-            <input type="checkbox" name="TCI" class="form-checkbox text-blue-600">&nbsp;
-            <span>TCI</span>
-        </label>
-        <div class="flex space-x-4 mt-2">
-            &nbsp;&nbsp; <label class="flex items-center space-x-1">
-                <input type="radio" name="TCIMonth" value="jan" class="form-radio text-blue-600">
-                <span>Jan</span>
-            </label>&nbsp;
-            <label class="flex items-center space-x-1">
-                <input type="radio" name="TCIMonth" value="dec" class="form-radio text-blue-600">
-                <span>Dec</span>
-            </label>
-        </div>
-    </div>
-    <hr>
-
 </div>
