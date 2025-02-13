@@ -23,7 +23,12 @@ export class MapComponent implements AfterViewInit {
   lesseeBoundaryLayer!: TileLayer<TileWMS>;
   janTotalLayer!: TileLayer<TileWMS>;
   decTotalLayer!: TileLayer<TileWMS>;
-  tciLayer!: TileLayer<TileWMS>;
+  marNearByLayer!: TileLayer<TileWMS>;
+  decNearByLayer!: TileLayer<TileWMS>;
+
+  isTotalIllegalMiningVisible: boolean = false;
+  isNearByIllegalMiningVisible: boolean = false;
+  isTCIVisible: boolean = false;
 
   lessees: any;
 
@@ -35,6 +40,7 @@ export class MapComponent implements AfterViewInit {
     this.initLesseBoundaries();
     this.getAllLessees();
     this.initIllegalMiningLayers();
+    this.initNearByIllegalMining();
   }
 
   // Initialize the map
@@ -194,7 +200,7 @@ export class MapComponent implements AfterViewInit {
       source: new TileWMS({
         url: geoserverUrl,
         params: {
-          LAYERS: 'Illegal_Mining_Analysis:uw_dec_3_updated_1', // Update with correct December layer
+          LAYERS: 'Illegal_Mining_Analysis:uw_dec_3_updated_1',
           TILED: true,
         },
         serverType: 'geoserver',
@@ -206,14 +212,83 @@ export class MapComponent implements AfterViewInit {
     this.map.addLayer(this.decTotalLayer);
   }
 
+  // Handle checkbox toggle
+  toggleIllegalMiningVisibility(): void {
+    if (!this.isTotalIllegalMiningVisible) {
+      this.janTotalLayer.setVisible(false);
+      this.decTotalLayer.setVisible(false);
+    }
+  }
+
   // Toggle layers based on selection
-  toggleIllegalMiningLayer(month: string): void {
+  toggleTotalIllegalMiningLayer(month: string): void {
     if (month === 'jan') {
       this.janTotalLayer.setVisible(true);
       this.decTotalLayer.setVisible(false);
     } else if (month === 'dec') {
       this.janTotalLayer.setVisible(false);
       this.decTotalLayer.setVisible(true);
+    }
+  }
+
+  // Init NearBy Illegal Mining
+  initNearByIllegalMining(): void {
+    const geoserverUrl = 'http://192.168.25.102:8080/geoserver/wms';
+
+    this.marNearByLayer = new TileLayer({
+      source: new TileWMS({
+        url: geoserverUrl,
+        params: {
+          LAYERS: 'Illegal_Mining_Analysis:sp_outer_mines_march_2024',
+          TILED: true,
+        },
+        serverType: 'geoserver',
+      }),
+      visible: false, // Initially hidden
+    });
+
+    this.decNearByLayer = new TileLayer({
+      source: new TileWMS({
+        url: geoserverUrl,
+        params: {
+          LAYERS: 'Illegal_Mining_Analysis:sp_outer_mines_dec_2024',
+          TILED: true,
+        },
+        serverType: 'geoserver',
+      }),
+      visible: false, // Initially hidden
+    });
+
+    this.map.addLayer(this.marNearByLayer);
+    this.map.addLayer(this.decNearByLayer);
+  }
+  // Toggle layers based on selection
+  toggleNearByIllegalMiningLayer(month: string): void {
+    if (month === 'mar') {
+      this.marNearByLayer.setVisible(true);
+      this.decNearByLayer.setVisible(false);
+    } else if (month === 'dec') {
+      this.marNearByLayer.setVisible(false);
+      this.decNearByLayer.setVisible(true);
+    }
+  }
+
+  toggleNearBylIllegalMiningVisibility(): void {
+    if (!this.isNearByIllegalMiningVisible) {
+      this.marNearByLayer.setVisible(false);
+      this.decNearByLayer.setVisible(false);
+    }
+  }
+
+  toogleTCILayer(month: string): void {
+    if (month === 'jan') {
+    } else if (month === 'dec') {
+    }
+  }
+
+  toggleTCIVisibility(): void {
+    if (!this.isTCIVisible) {
+
     }
   }
 

@@ -25,37 +25,47 @@
                 <hr>
                 <!-- Total Illegal Mining Area -->
                 <div>
-                    <label class="flex items-center space-x-2">
-                        <span>Total Illegal Mining Area (2024)</span>
+                    <label class="d-flex gap-2 align-items-center">
+                        <input type="checkbox" class="check" class="form-checkbox text-blue-600"
+                            [(ngModel)]="isTotalIllegalMiningVisible" (change)="toggleIllegalMiningVisibility()">
+                        <span>Show Illegal Mining Area (2024)</span>
                     </label>
-                    <div class="flex space-x-4 mt-2">
+
+                    <div class="d-flex gap-2 mt-2" *ngIf="isTotalIllegalMiningVisible">
                         &nbsp;&nbsp;
-                        <label class="flex items-center space-x-1">
+                        <label class="d-flex gap-1">
                             <input type="radio" name="totalIllegalMiningMonth" value="jan"
-                                class="form-radio text-blue-600" (change)="toggleIllegalMiningLayer('jan')">
+                                class="form-radio text-blue-600" (change)="toggleTotalIllegalMiningLayer('jan')">
                             <span>Jan</span>
                         </label>&nbsp;
-                        <label class="flex items-center space-x-1">
+                        <label class="d-flex gap-1">
                             <input type="radio" name="totalIllegalMiningMonth" value="dec"
-                                class="form-radio text-blue-600" (change)="toggleIllegalMiningLayer('dec')">
+                                class="form-radio text-blue-600" (change)="toggleTotalIllegalMiningLayer('dec')">
                             <span>Dec</span>
                         </label>
                     </div>
                 </div>
 
+
                 <hr>
                 <!-- Nearby Illegal Mining -->
-                <div class="mb-4">
-                    <label class="flex items-center space-x-2">
-                        <span>Near by Illegal Mining(2024)</span>
+                <div>
+                    <label class="d-flex gap-2 align-items-center">
+                        <input type="checkbox" class="check" class="form-checkbox text-blue-600"
+                            [(ngModel)]="isNearByIllegalMiningVisible"
+                            (change)="toggleNearBylIllegalMiningVisibility()">
+                        <span>Nearby Illegal Mining Area (2024)</span>
                     </label>
-                    <div class="flex space-x-4 mt-2">
-                        &nbsp;&nbsp; <label class="flex items-center space-x-1">
-                            <input type="radio" name="illegalMiningMonth" value="jan" class="form-radio text-blue-600">
-                            <span>Jan</span>
+                    <div class="d-flex gap-2 mt-2" *ngIf="isNearByIllegalMiningVisible">
+                        &nbsp;&nbsp;
+                        <label class="d-flex gap-1">
+                            <input type="radio" name="totaNearBylIllegalMiningMonth" value="jan"
+                                class="form-radio text-blue-600" (change)="toggleNearByIllegalMiningLayer('mar')">
+                            <span>March</span>
                         </label>&nbsp;
-                        <label class="flex items-center space-x-1">
-                            <input type="radio" name="illegalMiningMonth" value="dec" class="form-radio text-blue-600">
+                        <label class="d-flex gap-1">
+                            <input type="radio" name="totaNearBylIllegalMiningMonth" value="dec"
+                                class="form-radio text-blue-600" (change)="toggleNearByIllegalMiningLayer('dec')">
                             <span>Dec</span>
                         </label>
                     </div>
@@ -63,16 +73,21 @@
                 <hr>
                 <!-- TCI -->
                 <div class="mb-4">
-                    <label class="flex items-center space-x-2">
+                    <label class="d-flex gap-2 align-items-center">
+                        <input type="checkbox" class="check" class="form-checkbox text-blue-600"
+                            [(ngModel)]="isTCIVisible" (change)="toggleTCIVisibility()">
                         <span>TCI(2024)</span>
                     </label>
-                    <div class="flex space-x-4 mt-2">
-                        &nbsp;&nbsp; <label class="flex items-center space-x-1">
-                            <input type="radio" name="TCIMonth" value="jan" class="form-radio text-blue-600">
+                    <div class="d-flex gap-2 mt-2" *ngIf="isTCIVisible">
+                        &nbsp;&nbsp;
+                        <label class="d-flex gap-1">
+                            <input type="radio" name="TCILayer" value="jan" (change)="toogleTCILayer('jan')" class="
+                                form-radio text-blue-600">
                             <span>Jan</span>
                         </label>&nbsp;
-                        <label class="flex items-center space-x-1">
-                            <input type="radio" name="TCIMonth" value="dec" class="form-radio text-blue-600">
+                        <label class="d-flex gap-1">
+                            <input type="radio" name="TCILayer" value="dec" (change)="toogleTCILayer('dec')" class="
+                                form-radio text-blue-600">
                             <span>Dec</span>
                         </label>
                     </div>
