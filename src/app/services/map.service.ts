@@ -14,5 +14,8 @@ export class MapService {
   public getJodaBoundary(): Observable<any> {
     return this.http.get(`${this.apiUrl}getJodaGeoJSON`);
   }
+  public getAllLessees(): Observable<any> {
+    return this.http.get(`${this.apiUrl}getAllLessees`);
+  }
 
 }

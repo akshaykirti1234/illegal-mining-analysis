@@ -5,46 +5,49 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-10 p-0">
+        <div class="col-9 p-0">
             <!-- Map -->
             <div id="map" style="height: 91vh;"></div>
         </div>
-        <div class="col-2">
-            <div class="side-panel p-4 bg-white w-72">
-                <h2 class="text-lg font-semibold mb-4">Filters</h2>
-                <!-- Lessee Boundary -->
-                <div class="mb-4">
-                    <label class="flex items-center space-x-2">
-                        <input type="checkbox" name="lesseeBoundary" class="form-checkbox text-blue-600">&nbsp;
-                        <span>Lessee Boundary</span>
-                    </label>
+        <div class="col-3 bg-light py-2 small">
+            <div>
+                <h4 class="p-1 text-center text-bg-primary rounded">Filters</h4>
+
+                <!-- Lessee Filter Selection (Dropdown) -->
+                <div class="filter">
+                    <label for="filterLayer">Choose Lessee</label>
+                    <select class="form-select" id="filterLayer" (change)="onFilterChange($event)">
+                        <option value="">All</option>
+                        <option *ngFor="let lessee of lessees" [value]="lessee.layer">{{lessee.layer}}</option>
+                        <!-- Add more options here -->
+                    </select>
                 </div>
                 <hr>
                 <!-- Total Illegal Mining Area -->
                 <div>
                     <label class="flex items-center space-x-2">
-                        <input type="checkbox" name="totalIllegalMining" class="form-checkbox text-blue-600">&nbsp;
-                        <span>Total Illegal Mining Area</span>
+                        <span>Total Illegal Mining Area (2024)</span>
                     </label>
                     <div class="flex space-x-4 mt-2">
-                        &nbsp;&nbsp; <label class="flex items-center space-x-1">
+                        &nbsp;&nbsp;
+                        <label class="flex items-center space-x-1">
                             <input type="radio" name="totalIllegalMiningMonth" value="jan"
-                                class="form-radio text-blue-600">
+                                class="form-radio text-blue-600" (change)="toggleIllegalMiningLayer('jan')">
                             <span>Jan</span>
                         </label>&nbsp;
                         <label class="flex items-center space-x-1">
                             <input type="radio" name="totalIllegalMiningMonth" value="dec"
-                                class="form-radio text-blue-600">
+                                class="form-radio text-blue-600" (change)="toggleIllegalMiningLayer('dec')">
                             <span>Dec</span>
                         </label>
                     </div>
                 </div>
+
                 <hr>
                 <!-- Nearby Illegal Mining -->
                 <div class="mb-4">
                     <label class="flex items-center space-x-2">
-                        <input type="checkbox" name="illegalMining" class="form-checkbox text-blue-600">&nbsp;
-                        <span>Near by Illegal Mining</span>
+                        <span>Near by Illegal Mining(2024)</span>
                     </label>
                     <div class="flex space-x-4 mt-2">
                         &nbsp;&nbsp; <label class="flex items-center space-x-1">
@@ -61,8 +64,7 @@
                 <!-- TCI -->
                 <div class="mb-4">
                     <label class="flex items-center space-x-2">
-                        <input type="checkbox" name="TCI" class="form-checkbox text-blue-600">&nbsp;
-                        <span>TCI</span>
+                        <span>TCI(2024)</span>
                     </label>
                     <div class="flex space-x-4 mt-2">
                         &nbsp;&nbsp; <label class="flex items-center space-x-1">
