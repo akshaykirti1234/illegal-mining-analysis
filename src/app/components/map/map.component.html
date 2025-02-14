@@ -26,72 +26,123 @@
                 <!-- Total Illegal Mining Area -->
                 <div>
                     <label class="d-flex gap-2 align-items-center">
-                        <input type="checkbox" class="check" class="form-checkbox text-blue-600"
+                        <input type="checkbox" class="form-checkbox text-blue-600"
                             [(ngModel)]="isTotalIllegalMiningVisible" (change)="toggleIllegalMiningVisibility()">
                         <span>Show Illegal Mining Area (2024)</span>
                     </label>
 
-                    <div class="d-flex gap-2 mt-2" *ngIf="isTotalIllegalMiningVisible">
-                        &nbsp;&nbsp;
-                        <label class="d-flex gap-1">
-                            <input type="radio" name="totalIllegalMiningMonth" value="jan"
-                                class="form-radio text-blue-600" (change)="toggleTotalIllegalMiningLayer('jan')">
-                            <span>Jan</span>
-                        </label>&nbsp;
-                        <label class="d-flex gap-1">
-                            <input type="radio" name="totalIllegalMiningMonth" value="dec"
-                                class="form-radio text-blue-600" (change)="toggleTotalIllegalMiningLayer('dec')">
-                            <span>Dec</span>
+                    <div class="d-flex flex-column mt-2" *ngIf="isTotalIllegalMiningVisible">
+                        <label class="d-flex justify-content-around">
+                            <div class="d-flex gap-1">
+                                <input type="checkbox" class="form-check-input" [(ngModel)]="isJanTotalVisible"
+                                    (change)="toggleTotalIllegalMiningLayer('jan')">
+                                <span>Jan</span>
+                            </div>
+                            <div>
+                                <input type="range" class="form-range" [(ngModel)]="janTotalLayerOpacity"
+                                    (input)="updateLayerOpacity('janTotal', janTotalLayerOpacity)" min="0.1" max="1.0"
+                                    step="0.1">
+                            </div>
+                        </label>
+
+                        <label class="d-flex justify-content-around">
+                            <div class="d-flex gap-1">
+                                <input type="checkbox" class="form-check-input" [(ngModel)]="isDecTotalVisible"
+                                    (change)="toggleTotalIllegalMiningLayer('dec')">
+                                <span>Dec</span>
+                            </div>
+                            <div>
+                                <input type="range" class="form-range" [(ngModel)]="decTotalLayerOpacity"
+                                    (input)="updateLayerOpacity('decTotal', decTotalLayerOpacity)" min="0.1" max="1.0"
+                                    step="0.1">
+                            </div>
                         </label>
                     </div>
                 </div>
 
 
+
                 <hr>
+
+
+
                 <!-- Nearby Illegal Mining -->
                 <div>
                     <label class="d-flex gap-2 align-items-center">
-                        <input type="checkbox" class="check" class="form-checkbox text-blue-600"
+                        <input type="checkbox" class="form-checkbox text-blue-600"
                             [(ngModel)]="isNearByIllegalMiningVisible"
                             (change)="toggleNearBylIllegalMiningVisibility()">
                         <span>Nearby Illegal Mining Area (2024)</span>
                     </label>
-                    <div class="d-flex gap-2 mt-2" *ngIf="isNearByIllegalMiningVisible">
-                        &nbsp;&nbsp;
-                        <label class="d-flex gap-1">
-                            <input type="radio" name="totaNearBylIllegalMiningMonth" value="jan"
-                                class="form-radio text-blue-600" (change)="toggleNearByIllegalMiningLayer('mar')">
-                            <span>March</span>
-                        </label>&nbsp;
-                        <label class="d-flex gap-1">
-                            <input type="radio" name="totaNearBylIllegalMiningMonth" value="dec"
-                                class="form-radio text-blue-600" (change)="toggleNearByIllegalMiningLayer('dec')">
-                            <span>Dec</span>
+
+                    <div class="d-flex flex-column mt-2" *ngIf="isNearByIllegalMiningVisible">
+                        <label class="d-flex justify-content-around">
+                            <div class="d-flex gap-1">
+                                <input type="checkbox" class="form-check-input" [(ngModel)]="isMarNearByVisible"
+                                    (change)="toggleNearByIllegalMiningLayer('mar')">
+                                <span>Mar</span>
+                            </div>
+                            <div>
+                                <input type="range" class="form-range" [(ngModel)]="marNearByLayerOpacity"
+                                    (input)="updateLayerOpacity('marNearBy', marNearByLayerOpacity)" min="0.1" max="1.0"
+                                    step="0.1">
+                            </div>
+                        </label>
+
+                        <label class="d-flex justify-content-around">
+                            <div class="d-flex gap-1">
+                                <input type="checkbox" class="form-check-input" [(ngModel)]="isDecNearByVisible"
+                                    (change)="toggleNearByIllegalMiningLayer('dec')">
+                                <span>Dec</span>
+                            </div>
+                            <div>
+                                <input type="range" class="form-range" [(ngModel)]="decNearByLayerOpacity"
+                                    (input)="updateLayerOpacity('decNearBy', decNearByLayerOpacity)" min="0.1" max="1.0"
+                                    step="0.1">
+                            </div>
                         </label>
                     </div>
                 </div>
+
                 <hr>
+
                 <!-- TCI -->
                 <div class="mb-4">
                     <label class="d-flex gap-2 align-items-center">
-                        <input type="checkbox" class="check" class="form-checkbox text-blue-600"
-                            [(ngModel)]="isTCIVisible" (change)="toggleTCIVisibility()">
-                        <span>TCI(2024)</span>
+                        <input type="checkbox" class="form-checkbox text-blue-600" [(ngModel)]="isTCIVisible"
+                            (change)="toggleTCIVisibility()">
+                        <span>TCI (2024)</span>
                     </label>
-                    <div class="d-flex gap-2 mt-2" *ngIf="isTCIVisible">
-                        &nbsp;&nbsp;
-                        <label class="d-flex gap-1">
-                            <input type="radio" name="TCILayer" value="jan" (change)="toogleTCILayer('jan')" class="
-                                form-radio text-blue-600">
-                            <span>Jan</span>
-                        </label>&nbsp;
-                        <label class="d-flex gap-1">
-                            <input type="radio" name="TCILayer" value="dec" (change)="toogleTCILayer('dec')" class="
-                                form-radio text-blue-600">
-                            <span>Dec</span>
+
+                    <div class="d-flex flex-column mt-2" *ngIf="isTCIVisible">
+                        <label class="d-flex justify-content-around">
+                            <div class="d-flex gap-1">
+                                <input type="checkbox" class="form-check-input" [(ngModel)]="isJanTCIVisible"
+                                    (change)="toggleTCILayer('jan')">
+                                <span>Jan</span>
+                            </div>
+                            <div>
+                                <input type="range" class="form-range" [(ngModel)]="janTCILayerOpacity"
+                                    (input)="updateLayerOpacity('janTCI', janTCILayerOpacity)" min="0.1" max="1.0"
+                                    step="0.1">
+                            </div>
+                        </label>
+
+                        <label class="d-flex justify-content-around">
+                            <div class="d-flex gap-1">
+                                <input type="checkbox" class="form-check-input" [(ngModel)]="isDecTCIVisible"
+                                    (change)="toggleTCILayer('dec')">
+                                <span>Dec</span>
+                            </div>
+                            <div>
+                                <input type="range" class="form-range" [(ngModel)]="decTCILayerOpacity"
+                                    (input)="updateLayerOpacity('decTCI', decTCILayerOpacity)" min="0.1" max="1.0"
+                                    step="0.1">
+                            </div>
                         </label>
                     </div>
                 </div>
+
                 <hr>
             </div>
         </div>

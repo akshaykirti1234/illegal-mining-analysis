@@ -25,6 +25,22 @@ export class MapComponent implements AfterViewInit {
   decTotalLayer!: TileLayer<TileWMS>;
   marNearByLayer!: TileLayer<TileWMS>;
   decNearByLayer!: TileLayer<TileWMS>;
+  janTCILayer!: TileLayer<TileWMS>;
+  decTCILayer!: TileLayer<TileWMS>;
+
+  isJanTotalVisible: boolean = false;
+  isDecTotalVisible: boolean = false;
+  isMarNearByVisible: boolean = false;
+  isDecNearByVisible: boolean = false;
+  isJanTCIVisible = false;
+  isDecTCIVisible = false;
+
+  janTCILayerOpacity = 1;
+  decTCILayerOpacity = 1;
+  janTotalLayerOpacity: number = 1.0;
+  decTotalLayerOpacity: number = 1.0;
+  decNearByLayerOpacity: number = 1.0;
+  marNearByLayerOpacity: number = 1.0;
 
   isTotalIllegalMiningVisible: boolean = false;
   isNearByIllegalMiningVisible: boolean = false;
@@ -41,6 +57,7 @@ export class MapComponent implements AfterViewInit {
     this.getAllLessees();
     this.initIllegalMiningLayers();
     this.initNearByIllegalMining();
+    // this.initTCILayers();
   }
 
   // Initialize the map
@@ -56,9 +73,36 @@ export class MapComponent implements AfterViewInit {
       visible: false,
     });
 
+    const geoserverUrl = 'http://192.168.25.102:8080/geoserver/wms';
+
+    this.janTCILayer = new TileLayer({
+      source: new TileWMS({
+        url: geoserverUrl,
+        params: {
+          LAYERS: 'Illegal_Mining_Analysis:TCI_Joda_Jan_Mar',
+          TILED: true,
+        },
+        serverType: 'geoserver',
+      }),
+      visible: false, // Initially hidden
+    });
+
+    this.decTCILayer = new TileLayer({
+      source: new TileWMS({
+        url: geoserverUrl,
+        params: {
+          LAYERS: 'Illegal_Mining_Analysis:true_color_image_2024_nov_dec',
+          TILED: true,
+        },
+        serverType: 'geoserver',
+      }),
+      visible: false, // Initially hidden
+    });
+
+
     this.map = new Map({
       target: 'map',
-      layers: [this.defaultLayer, this.satelliteLayer],
+      layers: [this.defaultLayer, this.satelliteLayer, this.janTCILayer, this.decTCILayer],
       view: new View({
         center: [0, 0],
         zoom: 2,
@@ -212,24 +256,25 @@ export class MapComponent implements AfterViewInit {
     this.map.addLayer(this.decTotalLayer);
   }
 
-  // Handle checkbox toggle
+  // Handle Total Mining checkbox toggle
   toggleIllegalMiningVisibility(): void {
     if (!this.isTotalIllegalMiningVisible) {
+      this.isJanTotalVisible = false;
+      this.isDecTotalVisible = false;
       this.janTotalLayer.setVisible(false);
       this.decTotalLayer.setVisible(false);
     }
   }
 
-  // Toggle layers based on selection
+  // Toggle layers independently
   toggleTotalIllegalMiningLayer(month: string): void {
-    if (month === 'jan') {
-      this.janTotalLayer.setVisible(true);
-      this.decTotalLayer.setVisible(false);
-    } else if (month === 'dec') {
-      this.janTotalLayer.setVisible(false);
-      this.decTotalLayer.setVisible(true);
+    if (month === "jan") {
+      this.janTotalLayer.setVisible(this.isJanTotalVisible);
+    } else if (month === "dec") {
+      this.decTotalLayer.setVisible(this.isDecTotalVisible);
     }
   }
+
 
   // Init NearBy Illegal Mining
   initNearByIllegalMining(): void {
@@ -262,33 +307,69 @@ export class MapComponent implements AfterViewInit {
     this.map.addLayer(this.marNearByLayer);
     this.map.addLayer(this.decNearByLayer);
   }
-  // Toggle layers based on selection
-  toggleNearByIllegalMiningLayer(month: string): void {
-    if (month === 'mar') {
-      this.marNearByLayer.setVisible(true);
-      this.decNearByLayer.setVisible(false);
-    } else if (month === 'dec') {
-      this.marNearByLayer.setVisible(false);
-      this.decNearByLayer.setVisible(true);
-    }
-  }
 
+  // Handle Total Mining checkbox toggle
   toggleNearBylIllegalMiningVisibility(): void {
     if (!this.isNearByIllegalMiningVisible) {
+      this.isMarNearByVisible = false;
+      this.isDecNearByVisible = false;
       this.marNearByLayer.setVisible(false);
       this.decNearByLayer.setVisible(false);
     }
   }
 
-  toogleTCILayer(month: string): void {
-    if (month === 'jan') {
-    } else if (month === 'dec') {
+  // Toggle layers independently
+  toggleNearByIllegalMiningLayer(month: string): void {
+    if (month === "mar") {
+      this.marNearByLayer.setVisible(this.isMarNearByVisible);
+    } else if (month === "dec") {
+      this.decNearByLayer.setVisible(this.isDecNearByVisible);
     }
   }
 
+  // ------------------------------------TCI Layer------------------------------------
+
+  // Toggle overall TCI visibility
   toggleTCIVisibility(): void {
     if (!this.isTCIVisible) {
+      this.isJanTCIVisible = false;
+      this.isDecTCIVisible = false;
+      this.janTCILayer.setVisible(false);
+      this.decTCILayer.setVisible(false);
+    }
+  }
 
+  // Toggle individual TCI layers
+  toggleTCILayer(month: string): void {
+    if (month === "jan") {
+      this.janTCILayer.setVisible(this.isJanTCIVisible);
+    } else if (month === "dec") {
+      this.decTCILayer.setVisible(this.isDecTCIVisible);
+    }
+  }
+
+  // Update opacity of layers
+
+  updateLayerOpacity(month: string, opacity: number): void {
+    switch (month) {
+      case "janTotal":
+        this.janTotalLayer.setOpacity(opacity);
+        break;
+      case "decTotal":
+        this.decTotalLayer.setOpacity(opacity);
+        break;
+      case "marNearBy":
+        this.marNearByLayer.setOpacity(opacity);
+        break;
+      case "decNearBy":
+        this.decNearByLayer.setOpacity(opacity);
+        break;
+      case "janTCI":
+        this.janTCILayer.setOpacity(opacity);
+        break;
+      case "decTCI":
+        this.decTCILayer.setOpacity(opacity);
+        break;
     }
   }
 
