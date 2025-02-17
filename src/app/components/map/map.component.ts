@@ -43,13 +43,19 @@ export class MapComponent implements AfterViewInit {
   decTotalLayerOpacity: number = 1.0;
   decNearByLayerOpacity: number = 1.0;
   marNearByLayerOpacity: number = 1.0;
-
+  lesseLayerOpacity: number = 1.0;
   isTotalIllegalMiningVisible: boolean = false;
   isNearByIllegalMiningVisible: boolean = false;
   isTCIVisible: boolean = false;
 
   lessees: any;
+  janTotalLegendUrl: any;
+  decTotalLegendUrl: any;
 
+  decNearByLegendUrl: any;
+  marNearByLegendUrl: any;
+
+  lesseeLegendUrl: any;
   constructor(private mapService: MapService) { }
 
   ngAfterViewInit(): void {
@@ -184,6 +190,7 @@ export class MapComponent implements AfterViewInit {
   // Initialize Lessee Boundaries
   initLesseBoundaries(): void {
     const geoserverUrl = 'http://192.168.25.102:8080/geoserver/wms';
+    this.lesseeLegendUrl = `${geoserverUrl}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=Illegal_Mining_Analysis:kml_joda_lessee&STYLE=&LEGEND_OPTIONS=fontName:Arial;fontSize:12;dpi:96`;
 
     this.lesseeBoundaryLayer = new TileLayer({
       source: new TileWMS({
@@ -229,7 +236,8 @@ export class MapComponent implements AfterViewInit {
   // Initialize both illegal mining layers
   initIllegalMiningLayers(): void {
     const geoserverUrl = 'http://192.168.25.102:8080/geoserver/wms';
-
+    this.janTotalLegendUrl = `${geoserverUrl}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=Illegal_Mining_Analysis:uw_jan_3_updated_1&STYLE=&LEGEND_OPTIONS=fontName:Arial;fontSize:12;dpi:96`;
+    this.decTotalLegendUrl = `${geoserverUrl}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=Illegal_Mining_Analysis:uw_dec_3_updated_1&STYLE=&LEGEND_OPTIONS=fontName:Arial;fontSize:12;dpi:96`;
     this.janTotalLayer = new TileLayer({
       source: new TileWMS({
         url: geoserverUrl,
@@ -288,7 +296,8 @@ export class MapComponent implements AfterViewInit {
   // Init NearBy Illegal Mining
   initNearByIllegalMining(): void {
     const geoserverUrl = 'http://192.168.25.102:8080/geoserver/wms';
-
+    this.marNearByLegendUrl = `${geoserverUrl}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=Illegal_Mining_Analysis:sp_outer_mines_march_2024&STYLE=&LEGEND_OPTIONS=fontName:Arial;fontSize:12;dpi:96`;
+    this.decNearByLegendUrl = `${geoserverUrl}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&FORMAT=image/png&LAYER=Illegal_Mining_Analysis:sp_outer_mines_dec_2024&STYLE=&LEGEND_OPTIONS=fontName:Arial;fontSize:12;dpi:96`;
     this.marNearByLayer = new TileLayer({
       source: new TileWMS({
         url: geoserverUrl,
@@ -379,6 +388,8 @@ export class MapComponent implements AfterViewInit {
       case "decTCI":
         this.decTCILayer.setOpacity(opacity);
         break;
+      case "lessee":
+        this.lesseeBoundaryLayer.setOpacity(opacity);
     }
   }
 

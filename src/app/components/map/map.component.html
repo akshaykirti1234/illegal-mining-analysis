@@ -27,6 +27,14 @@
                             <option *ngFor="let lessee of lessees" [value]="lessee.layer">{{lessee.layer}}</option>
                             <!-- Add more options here -->
                         </select>
+                        <img [src]="lesseeLegendUrl" alt="lessee Legend" width="20" height="20"> <span>Lessee
+                            Boundry</span>
+                        <div class="d-flex gap-3">
+                            <span> Opacity </span>
+                            <input type="range" class="form-range" [(ngModel)]="lesseLayerOpacity"
+                                (input)="updateLayerOpacity('lessee', lesseLayerOpacity)" min="0.1" max="1.0"
+                                step="0.1">
+                        </div>
                     </div>
                 </div>
                 <hr>
@@ -43,6 +51,8 @@
                             <div class="d-flex gap-1">
                                 <input type="checkbox" class="form-check-input" [(ngModel)]="isJanTotalVisible"
                                     (change)="toggleTotalIllegalMiningLayer('jan')">
+                                <img [src]="janTotalLegendUrl" alt="Dec Legend" width="20" height="20">
+
                                 <span>Jan</span>
                             </div>
                             <div [ngClass]="{'disabled-div': !isJanTotalVisible}">
@@ -56,6 +66,7 @@
                             <div class="d-flex gap-1">
                                 <input type="checkbox" class="form-check-input" [(ngModel)]="isDecTotalVisible"
                                     (change)="toggleTotalIllegalMiningLayer('dec')">
+                                <img [src]="decTotalLegendUrl" alt="Dec Legend" width="20" height="20">
                                 <span>Dec</span>
                             </div>
                             <div [ngClass]="{'disabled-div': !isDecTotalVisible}">
@@ -87,6 +98,8 @@
                             <div class="d-flex gap-1">
                                 <input type="checkbox" class="form-check-input" [(ngModel)]="isMarNearByVisible"
                                     (change)="toggleNearByIllegalMiningLayer('mar')">
+                                <img [src]="marNearByLegendUrl" alt="Dec Legend" width="20" height="20">
+
                                 <span>Mar</span>
                             </div>
                             <div [ngClass]="{'disabled-div': !isMarNearByVisible}">
@@ -100,6 +113,8 @@
                             <div class="d-flex gap-1">
                                 <input type="checkbox" class="form-check-input" [(ngModel)]="isDecNearByVisible"
                                     (change)="toggleNearByIllegalMiningLayer('dec')">
+                                <img [src]="decNearByLegendUrl" alt="Dec Legend" width="20" height="20">
+
                                 <span>Dec</span>
                             </div>
                             <div [ngClass]="{'disabled-div': !isDecNearByVisible}">
