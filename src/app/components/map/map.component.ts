@@ -20,6 +20,8 @@ export class MapComponent implements AfterViewInit {
   satelliteLayer!: TileLayer<XYZ>;
   isSatellite: boolean = false;
 
+  isLesseeChecked: boolean = true;
+
   lesseeBoundaryLayer!: TileLayer<TileWMS>;
   janTotalLayer!: TileLayer<TileWMS>;
   decTotalLayer!: TileLayer<TileWMS>;
@@ -79,7 +81,7 @@ export class MapComponent implements AfterViewInit {
       source: new TileWMS({
         url: geoserverUrl,
         params: {
-          LAYERS: 'Illegal_Mining_Analysis:TCI_Joda_Jan_Mar',
+          LAYERS: 'Illegal_Mining_Analysis:tci_jan',
           TILED: true,
         },
         serverType: 'geoserver',
@@ -91,7 +93,7 @@ export class MapComponent implements AfterViewInit {
       source: new TileWMS({
         url: geoserverUrl,
         params: {
-          LAYERS: 'Illegal_Mining_Analysis:true_color_image_2024_nov_dec',
+          LAYERS: 'Illegal_Mining_Analysis:tci_dec',
           TILED: true,
         },
         serverType: 'geoserver',
@@ -255,6 +257,13 @@ export class MapComponent implements AfterViewInit {
     this.map.addLayer(this.janTotalLayer);
     this.map.addLayer(this.decTotalLayer);
   }
+
+  // Handel Lesse Visibility
+  toggleLesseeVisibility() {
+    this.isLesseeChecked = !this.isLesseeChecked;
+    this.lesseeBoundaryLayer.setVisible(this.isLesseeChecked);
+  }
+
 
   // Handle Total Mining checkbox toggle
   toggleIllegalMiningVisibility(): void {

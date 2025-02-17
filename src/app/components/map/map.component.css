@@ -14,3 +14,21 @@
 label {
     font-weight: bold;
 }
+
+.disabled-div {
+    pointer-events: none;
+    /* Disables clicks */
+    opacity: 0.5;
+    /* Makes it look visually disabled */
+    user-select: none;
+    /* Prevents text selection */
+}
+
+input,
+span {
+    font-weight: bold;
+}
+
+input {
+    cursor: pointer;
+}
